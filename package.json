@@ -12,7 +12,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "prepare": "[ -d .git ] && ./scripts/install-hooks.sh || true",
+    "prepare": "npm run build || true",
     "build": "tsc -p tsconfig.build.json && printf '#!/usr/bin/env node\n' | cat - dist/qmd.js > dist/qmd.tmp && mv dist/qmd.tmp dist/qmd.js && chmod +x dist/qmd.js",
     "test": "vitest run --reporter=verbose test/",
     "qmd": "tsx src/qmd.ts",
