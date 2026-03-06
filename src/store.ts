@@ -698,7 +698,7 @@ function initializeDatabase(db: Database): void {
   db.exec(`
     CREATE VIRTUAL TABLE IF NOT EXISTS documents_fts USING fts5(
       filepath, title, body,
-      tokenize='porter unicode61'
+      tokenize='unicode61'
     )
   `);
 

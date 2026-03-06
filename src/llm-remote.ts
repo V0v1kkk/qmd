@@ -227,7 +227,7 @@ export class RemoteLlamaCpp implements LLM {
     const includeLexical = options?.includeLexical ?? true;
 
     try {
-      const prompt = `/no_think Expand this search query: ${query}`;
+      const prompt = `/no_think Expand this search query into multiple retrieval variants.\nIf the query is not in English, include variants in both the original language and English.\nQuery: ${query}`;
       const res = await this.post<ChatCompletionResponse>(
         `${this.generateUrl}/v1/chat/completions`,
         {
@@ -246,7 +246,7 @@ export class RemoteLlamaCpp implements LLM {
 
       const queryLower = query.toLowerCase();
       const queryTerms = queryLower
-        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/[^\p{L}\p{N}\s]/gu, " ")
         .split(/\s+/)
         .filter(Boolean);
 
